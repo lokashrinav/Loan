@@ -7,6 +7,11 @@ const Footer = ({ navigation }) => {
         navigation.navigate('viewProfile');
       };
 
+    const handlePostPress = () => {
+        //TODO: MAKE THIS ACTUAL POSTING
+        // RIGHT NOW I AM JUST NAVIGATING TO TEST MY AUTH CODE
+        console.log("Post Pressed");
+      }
   return (
     <View style={styles.footer}>
             <TouchableOpacity style={styles.profileArea} onPress={handleProfilePress}>
@@ -14,7 +19,7 @@ const Footer = ({ navigation }) => {
                     style={styles.image}
                     />  
             </TouchableOpacity>
-            <View style={styles.addPostArea}>
+            <View style={styles.addPostArea} onPress={handlePostPress}>
                 <Image source={require('./add.png')}
                 style={styles.image}
                 />             

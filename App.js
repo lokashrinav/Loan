@@ -13,6 +13,8 @@ const Stack = createNativeStackNavigator();
 currentUser = 0
 
 export default function App() {
+
+
   const current = {
     "credit": "C+",
     "id": "4",
