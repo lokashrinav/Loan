@@ -1,0 +1,151 @@
+{
+    "users": [
+      {
+        "credit": "C+",
+        "id": "4",
+        "name": "Michael Brown",
+        "email": "michael.brown@example.com",
+        "password": "hashed_password",
+        "creditCard": {
+          "cardNumber": "3698 7412 5841 2369",
+          "expiryDate": "05/22",
+          "cvv": "321"
+        },
+        "address": {
+          "street": "321 Pine St",
+          "city": "Villagetown",
+          "state": "FL",
+          "zipCode": "45678",
+          "country": "USA"
+        },
+        "ssn": "789-12-3456",
+        "profileImage": "http://images.dinosaurpictures.org/dinosaurs-tyrannosaurus_00336745_13a8.jpg"
+      },
+      {
+        "credit": "B-",
+        "id": "5",
+        "name": "Emily Wilson",
+        "email": "emily.wilson@example.com",
+        "password": "hashed_password",
+        "creditCard": {
+          "cardNumber": "9870 1234 5678 9087",
+          "expiryDate": "09/23",
+          "cvv": "654"
+        },
+        "address": {
+          "street": "654 Maple St",
+          "city": "Largetown",
+          "state": "WA",
+          "zipCode": "23456",
+          "country": "USA"
+        },
+        "ssn": "123-98-7654",
+        "profileImage": "https://example.com/profile_images/emily_wilson.jpg"
+      },
+      {
+        "credit": "B+",
+        "id": "6",
+        "name": "David Lee",
+        "email": "david.lee@example.com",
+        "password": "hashed_password",
+        "creditCard": {
+          "cardNumber": "1598 3574 6842 9012",
+          "expiryDate": "02/25",
+          "cvv": "987"
+        },
+        "address": {
+          "street": "987 Cedar St",
+          "city": "Mountaintown",
+          "state": "CO",
+          "zipCode": "34567",
+          "country": "USA"
+        },
+        "ssn": "654-32-1098",
+        "profileImage": "https://example.com/profile_images/david_lee.jpg"
+      },
+      {
+        "credit": "B",
+        "id": "7",
+        "name": "Olivia Martinez",
+        "email": "olivia.martinez@example.com",
+        "password": "hashed_password",
+        "creditCard": {
+          "cardNumber": "7531 8642 9075 8136",
+          "expiryDate": "07/23",
+          "cvv": "246"
+        },
+        "address": {
+          "street": "753 Elm St",
+          "city": "Beachtown",
+          "state": "CA",
+          "zipCode": "45678",
+          "country": "USA"
+        },
+        "ssn": "879-45-3210",
+        "profileImage": "https://example.com/profile_images/olivia_martinez.jpg"
+      },
+      {
+        "credit": "B",
+        "id": "8",
+        "name": "James Rodriguez",
+        "email": "james.rodriguez@example.com",
+        "password": "hashed_password",
+        "creditCard": {
+          "cardNumber": "7539 8246 1097 5823",
+          "expiryDate": "03/24",
+          "cvv": "135"
+        },
+        "address": {
+          "street": "159 Pine St",
+          "city": "Deserttown",
+          "state": "AZ",
+          "zipCode": "56789",
+          "country": "USA"
+        },
+        "ssn": "753-10-8642",
+        "profileImage": "https://example.com/profile_images/james_rodriguez.jpg"
+      },
+      {
+        "credit": "A",
+        "id": "9",
+        "name": "Sophia Taylor",
+        "email": "sophia.taylor@example.com",
+        "password": "hashed_password",
+        "creditCard": {
+          "cardNumber": "3579 6824 1085 7932",
+          "expiryDate": "10/22",
+          "cvv": "579"
+        },
+        "address": {
+          "street": "357 Oak St",
+          "city": "Rivertown",
+          "state": "CA",
+          "zipCode": "67890",
+          "country": "USA"
+        },
+        "ssn": "246-75-9810",
+        "profileImage": "https://example.com/profile_images/sophia_taylor.jpg"
+      },
+      {
+        "credit": "A+",
+        "id": "10",
+        "name": "William Clark",
+        "email": "william.clark@example.com",
+        "password": "hashed_password",
+        "creditCard": {
+          "cardNumber": "5792 4681 3570 8246",
+          "expiryDate": "06/23",
+          "cvv": "792"
+        },
+        "address": {
+          "street": "579 Pine St",
+          "city": "Hilltown",
+          "state": "NC",
+          "zipCode": "12345",
+          "country": "USA"
+        },
+        "ssn": "357-68-2409",
+        "profileImage": "https://example.com/profile_images/william_clark.jpg"
+      }
+    ]
+  }  

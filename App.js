@@ -1,20 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomePage from './HomePage'; // Import your home page component
+import LoanDetailsScreen from './LoanDetailsScreen'; // Import your loan details screen component
+import ViewProfileScreen from './viewProfile';
+
+const loansData = require('./tempData.json');
+
+const userData = require('./userData.json');
+
+const Stack = createNativeStackNavigator();
+
+currentUser = 0
 
 export default function App() {
+  const current = {
+    "credit": "C+",
+    "id": "4",
+    "name": "Michael Brown",
+    "email": "michael.brown@example.com",
+    "password": "hashed_password",
+    "creditCard": {
+      "cardNumber": "3698 7412 5841 2369",
+      "expiryDate": "05/22",
+      "cvv": "321"
+    },
+    "address": {
+      "street": "321 Pine St",
+      "city": "Villagetown",
+      "state": "FL",
+      "zipCode": "45678",
+      "country": "USA"
+    },
+    "ssn": "789-12-3456",
+    "profileImage": "http://images.dinosaurpictures.org/dinosaurs-tyrannosaurus_00336745_13a8.jpg"
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomePage} />
+        {loansData.loans.map((loan, index) => (
+          <Stack.Screen
+            key={index}
+            name={`LoanDetails${index}`} // Use a unique name for each screen
+            component={LoanDetailsScreen}
+            initialParams={{ loan }} // Pass the loan object as params
+          />
+        ))}
+        <Stack.Screen name="viewProfile" component={ViewProfileScreen} initialParams={{ profile: current }} />
+        </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
