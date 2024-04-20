@@ -6,6 +6,12 @@ const Footer = ({ navigation }) => {
     const handleProfilePress = () => {
         navigation.navigate('viewProfile');
       };
+    const handleAddPress = () => {
+        navigation.navigate('viewAdd');
+      };
+    const handleNotificationPress = () => {
+        navigation.navigate('viewNotification');
+      };
 
     const handlePostPress = () => {
         //TODO: MAKE THIS ACTUAL POSTING
@@ -19,16 +25,16 @@ const Footer = ({ navigation }) => {
                     style={styles.image}
                     />  
             </TouchableOpacity>
-            <View style={styles.addPostArea} onPress={handlePostPress}>
+            <TouchableOpacity style={styles.addPostArea} onPress={handleAddPress}>
                 <Image source={require('./add.png')}
                 style={styles.image}
                 />             
-            </View>
-            <View style={styles.notificationsArea}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.notificationsArea} onPress={handleNotificationPress}>
                 <Image source={require('./notification.png')}
                 style={styles.image}
                 />        
-            </View>      
+            </TouchableOpacity>      
     </View>
   )
 }
