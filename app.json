@@ -4,6 +4,7 @@
     "slug": "Loan",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "exp://172.23.16.141:8081",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
