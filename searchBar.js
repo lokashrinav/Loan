@@ -24,7 +24,7 @@ const Search_Bar = () => {
 
 const styles = StyleSheet.create({
     searchBar: {
-        width: '80%',
+        width: '100%',
         height: '100%',
     },
     searchStyle: {
