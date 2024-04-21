@@ -1,10 +1,10 @@
 import { getDiscoveryDocument } from './DiscoveryDocument';
 import * as AuthSession from 'expo-auth-session';
-import { useAuthRequest } from 'expo-auth-session';
-import React, { useState } from 'react'
+import { useAuthRequest, makeRedirectUri } from 'expo-auth-session';
+import React, { useState, useEffect } from 'react';
 import { Alert, Button, Image, Pressable, SafeAreaView, StyleSheet, Switch, Text, TextInput, View } from 'react-native'
 
-const discoveryDocument = getDiscoveryDocument();
+/* const discoveryDocument = getDiscoveryDocument();
 const [request, response, promptAsync] = useAuthRequest(
     {
         clientId: process.env.EXPO_PUBLIC_CLIENT_ID ?? '',
@@ -13,33 +13,49 @@ const [request, response, promptAsync] = useAuthRequest(
     },
     discoveryDocument,
 );
+ */
 
-useEffect(() => {
-    if (response?.type === 'success' && response.params.code && request?.codeVerifier) {
-        const getToken = async () => {
-            const exchangeTokenResponse = await AuthSession.exchangeCodeAsync(
-                {
-                    clientId: process.env.EXPO_PUBLIC_CLIENT_ID ?? '',
-                    code: response.params.code,
-                    redirectUri: process.env.EXPO_PUBLIC_REDIRECT_URI,
-                    extraParams: {
-                        code_verifier: request.codeVerifier ?? '',
-                    },
-                },
-                discoveryDocument,
-            );
-            saveValueToSecureStore('access_token', exchangeTokenResponse.accessToken);
-            saveValueToSecureStore('refresh_token', exchangeTokenResponse.refreshToken);
-        };
-        getToken();
-    }
-}, [response]);
 //go to IntroScreen.js
 
 export default function LoginScreen() {
+  const discoveryDocument = getDiscoveryDocument();
+  const [request, response, promptAsync] = useAuthRequest(
+    {
+      clientId: 'YOUR_CLIENT_ID',
+      scopes: ['openid', 'profile', 'email'],
+      redirectUri: makeRedirectUri({
+        native: 'YOUR_APP_SCHEME://redirect',
+      }),
+      extraParams: {
+        nonce: 'nonce', // ideally, this will be a random value
+      },
+    },
+    discoveryDocument
+  );
     const [click,setClick] = useState(false);
-    const {username,setUsername}=  useState("");
-    const {password,setPassword}=  useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    useEffect(() => {
+      if (response?.type === 'success' && response.params.code && request?.codeVerifier) {
+          const getToken = async () => {
+              const exchangeTokenResponse = await AuthSession.exchangeCodeAsync(
+                  {
+                      clientId: process.env.EXPO_PUBLIC_CLIENT_ID ?? '',
+                      code: response.params.code,
+                      redirectUri: process.env.EXPO_PUBLIC_REDIRECT_URI,
+                      extraParams: {
+                          code_verifier: request.codeVerifier ?? '',
+                      },
+                  },
+                  discoveryDocument,
+              );
+              saveValueToSecureStore('access_token', exchangeTokenResponse.accessToken);
+              saveValueToSecureStore('refresh_token', exchangeTokenResponse.refreshToken);
+          };
+          getToken();
+      }
+  }, [response]);
   return (
     <SafeAreaView style={styles.container}>
         
