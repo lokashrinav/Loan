@@ -49,7 +49,7 @@
         "fundedAmount": 500,
         "interestRate": "5.2%",
         "termMonths": 12,
-        "purpose": "Home improvement",
+        "purpose": "Home Improvement",
         "status": "Unfunded",
         "speech": "I'm Mary, and I've been saving up for months to renovate my home. With this loan, I'll finally be able to make the improvements I've been dreaming of."
       },
@@ -62,7 +62,7 @@
         "fundedAmount": 1000,
         "interestRate": "6.5%",
         "termMonths": 6,
-        "purpose": "Debt consolidation",
+        "purpose": "Debt Consolidation",
         "status": "Unfunded",
         "speech": "I'm Michael, and I've been overwhelmed by my debts. This loan will provide me with the financial relief I desperately need to get back on my feet."
       },

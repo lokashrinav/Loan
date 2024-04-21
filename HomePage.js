@@ -1,7 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import Footer from './Footer.js'
 import Header from './Header.js'
+import ProgressBar from 'react-native-progress/Bar'
+import { Chip, Divider } from 'react-native-elements';
 
 const loansData = require('./tempData.json');
 
@@ -16,30 +17,48 @@ export default function HomePage({navigation}) {
       <ScrollView style={styles.scrollView}   
       showsVerticalScrollIndicator={false}>
       {/*This is Empty space at the top above header. Temporarily change backgroundColor to identify in CSS below*/}
-      <View style={styles.empty} />
       {/* Header of file. Contains search bar and chat icon*/}
       <Header />
       <View style={styles.extraPadding}></View>
-      <View style={styles.smallSpacing} />
-
-
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Chip title="Location" containerStyle={{ marginVertical: 15, marginHorizontal: 5 }} />
+          <Chip title="Interest Rate" containerStyle={{ marginVertical: 15, marginHorizontal: 5 }} />
+          <Chip title="Amount" containerStyle={{ marginVertical: 15, marginHorizontal: 5 }} />
+          <Chip title="Term" containerStyle={{ marginVertical: 15, marginHorizontal: 5 }} />
+          <Chip title="Additional Filters" containerStyle={{ marginVertical: 15, marginHorizontal: 5 }} />
+        </View>
+      </ScrollView>
+      <Divider
+          style={{ width: "100%" }}
+          color="black"
+          width={1}
+          marginBottom = {15}
+          orientation="horizontal"
+      />
       
       <View style={styles.cardContainer}>
               <View style={styles.innerContainer}>
                 <View>
                 {loans.map((loan, index) => (
-                  <TouchableOpacity key={index} style={styles.Card} onPress={() => navigation.navigate(`LoanDetails${index}`)}>
+                  <TouchableOpacity key={index} onPress={() => navigation.navigate(`LoanDetails${index}`)} style={styles.Card}>
                     <View style={styles.Top}>
                       <Text style={styles.Title}>{loan.purpose}</Text>
                     </View>
+                      <ProgressBar progress={loan.fundedAmount/loan.amount} width={0.9 * styles.Card.width} height={10} color="green"/>
+                      <Text></Text>
                       <Text style={styles.Text}>Recipient: {loan.recipient}</Text> 
-                      <Text style={styles.Text}>Loan ID: {loan.LoanID}</Text>
                       <Text style={styles.Text}>Amount: {loan.amount}</Text>
                       <Text style={styles.Text}>Interest Rate: {loan.interestRate}</Text>
                       <Text style={styles.Text}>Term: {loan.termMonths}</Text>
-                      <Text style={styles.Text}>Number of Loaners: {loan.groupMembers.length}</Text>
                       <Text style={styles.Text1}>Click Card for More Information</Text>
-                
+                      <Divider
+                        style={{ width: "100%", margin: 5 }}
+                        color="black"
+                        width={1}
+                        marginBottom = {10}
+                        orientation="horizontal"
+                      />
                 </TouchableOpacity>
                 ))}
                 </View>
@@ -80,15 +99,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    width: '100%'
   },
   spacing: {
     marginVertical: 300, // Adjust the value as needed
   },
+  changeCard: {
+    width: '100%'
+  },
+  scrollView: {
+    width: '100%'
+  },  
   Card: {
-    marginBottom: 10,
+    marginBottom: 15,
     height: 220,
     backgroundColor: 'white',
-    width: 300,
+    width: 360,
     borderRadius: 15,
     borderWidth: 2,
     padding: 10
@@ -102,7 +128,8 @@ const styles = StyleSheet.create({
   },
   Text1: {
     marginBottom: 5,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign:'center'
   },
   Title: {
     fontWeight: 'bold',
