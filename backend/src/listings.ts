@@ -1,60 +1,67 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { html } from 'hono/html';
+import  DB  from './index';
+import {D1Database} from '@cloudflare/workers-types';
 
-
-
-export const createListing = async (c: any) => {
-	const user_id = c.body('user_id');
-	const amount = c.body('amount');
-	const description = c.body('description');
-	const loan_term = c.body('loan_term');
-	const recipient = c.body('recipient');
-	const query = `INSERT INTO listings (recipient_id, amount, description, status, loan_term, recipient) VALUES (${user_id}, ${amount}, ${description}, 'Seeking Lenders', ${loan_term}, ${recipient})`;
-	const listing = c.env.DB.prepare(query);
-	const loan_id = listing.first('loan_id');
-	const loan_query = `INSERT INTO loans (loan_id, amount, funding) VALUES (${loan_id}, ${amount}, 0)`;
-	const loan = c.env.DB.prepare(loan_query);
-	const joint = {listing, loan};
-	return c.json(joint);
+export const createListing = async (data: Request) => {
+	const json: JSON = await data.json();
+	const user_id = (json as unknown as { user_id: string })['user_id'];
+	const amount = (json as unknown as { amount: number })['amount'];
+	const description = (json as unknown as { description: string })['description'];
+	const loan_term = (json as unknown as { loan_term: number })['loan_term'];
+	const recipient = (json as unknown as { recipient: string })['recipient'];
+	const query1 = `INSERT INTO listings (recipient_id, amount, description, status, loan_term, recipient) VALUES (${user_id}, ${amount}, ${description}, 'Seeking Lenders', ${loan_term}, ${recipient})`;
+	const listing = DB.prepare(query1);
+	const executed = DB.exec(listing);
+	const loan_id = executed.first('loan_id');
+	const loan_query = `INSERT INTO loans (loan_id,  amount, funding,lender_id, lender_amounts) VALUES (${loan_id}, ${amount}, 0, '', '')`;
+	const loan = DB.prepare(loan_query);
+	const executedTwo = DB.exec(loan);
+	const joint = { listing, loan };
+	return new Response(JSON.stringify(joint));
 };
 
-export const updateNewLenders = async (c: any) => {
-	const loan_id = c.body('loan_id');
-	const lender_id = c.body('lender_id');
-	const lender_amount = c.body('lender_amount');
+export const updateNewLenders = async (request: Request) => {
+	const requestBody = await request.json();
+	const loan_id = requestBody.loan_id;
+	const lender_id = requestBody.lender_id;
+	const lender_amount = requestBody.lender_amount;
 	const query = `SELECT * FROM loans WHERE loan_id = ${loan_id}`;
-	const loan = c.env.DB.prepare(query);
+	const loan = DB.prepare(query);
+	const executedOne = DB.exec(loan);
 	const current_lenders = loan.first('lender_id');
 	const current_amounts = loan.first('lender_amounts');
 	const new_lenders = current_lenders + "," + lender_id;
 	const new_amounts = current_amounts + "," + lender_amount;
 	const update_query = `UPDATE loans SET lender_id = ${new_lenders}, lender_amounts = ${new_amounts} WHERE loan_id = ${loan_id}`;
-	const update = c.env.DB.prepare(update_query);
-	return c.json(update);
+	const update = DB.prepare(update_query);
+	const executedTwo = DB.exec(update);
+	return new Response(JSON.stringify(executedTwo));
 };
 
-export const updateStatusFinished = async (c: any) => {
-	const loan_id = c.body('loan_id');
+export const updateStatusFinished = async (request: Request) => {
+	const requestBody = await request.json();
+	const loan_id = requestBody.loan_id;
 	const status = "finished"
 	const query = `UPDATE listings SET status = '${status}' WHERE loan_id = ${loan_id}`;
+	const listing = DB.prepare(query);
+	const finished = DB.exec(listing);
+	return new Response(JSON.stringify(finished));
 };
 
-export const getListing = async (c: any) => {
-	const loan_id = c.body('loan_id');
+export const getListing = async (request: Request) => {
+	const requestBody = await request.json();
+	const loan_id = requestBody.loan_id;
 	const query = `SELECT * FROM listings WHERE loan_id = ${loan_id}`;
-	const listing = c.env.DB.prepare(query);
-	return c.json(listing);
+	const listing = DB.prepare(query);
+	const executed = DB.exec(listing);
+	return new Response(JSON.stringify(executed));
 };
 
-// get all listings
-
-export const getAllListings = async (c: any) => {
+export const getAllListings = async (request: Request) => {
 	const query = `SELECT * FROM listings`;
-	const listings = c.env.DB.prepare(query);
-	return c.json(listings);
+	const listings = DB.prepare(query);
+	const executed = DB.exec(listings);
+	return new Response(JSON.stringify(executed));
 };
-
-
-
-

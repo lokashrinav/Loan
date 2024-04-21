@@ -5,8 +5,6 @@ import ProgressBar from 'react-native-progress/Bar'
 import { Chip, Divider } from 'react-native-elements';
 
 const loansData = require('./tempData.json');
-
-
 // Main File - Home Page - Change anything as you see fit
 export default function HomePage({navigation}) {
   const loans = loansData.loans

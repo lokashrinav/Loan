@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf1687b8-d602-41ca-ac60-bc777e6ebe52" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/Loan.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.env" beforeDir="false" afterPath="$PROJECT_DIR$/../.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DiscoveryDocument.js" beforeDir="false" afterPath="$PROJECT_DIR$/../DiscoveryDocument.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../LoginScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoanDetailsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../LoanDetailsScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../viewProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../viewProfile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

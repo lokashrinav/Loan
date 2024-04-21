@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
-import { Input } from '@rneui/themed';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
-import { Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native';
+import * as Font from 'expo-font';
+
+
+// This is an async function that loads your font.
+const loadFonts = async () => {
+  await Font.loadAsync({
+    // The key is the name you'll use to refer to this font in your styles.
+    // The value is the location of your font file relative to your project root.
+    Arial: require('./assets/arial.ttf'),
+  });
+};
+
+// Call this function in your App component.
+loadFonts();
 
 const LoanDetailsScreen = ({ route }) => {
   const { loan } = route.params;
-  const jsonData = require('./tempData.json');
   const [joinAmount, setJoinAmount] = useState('');
 
   const join = () => {
-    if (joinAmount !== '') {
+    if (joinAmount.trim() !== '') {
       const amount = parseFloat(joinAmount);
       if (amount > 0 && amount <= (loan.amount - loan.fundedAmount)) {
         Alert.alert('Success', `Joining $${amount}`);
-        loan.fundedAmount = newFundedAmount;
-      
-        fs.writeFileSync('./tempData.json', JSON.stringify(jsonData, null, 2));
-        
+        // Update funded amount (assuming loan object is mutable)
+        loan.fundedAmount += amount;
+        // You might need to update your data store here
       } else {
         Alert.alert('Error', 'Please enter a valid amount');
       }
@@ -26,57 +36,20 @@ const LoanDetailsScreen = ({ route }) => {
   };
 
   return (
-    
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
-        <Text style={styles.title} marginTop={20}>Loan Details</Text>
-        <Image source={{ uri: loan.Link }} style={styles.image} marginBottom={20}/>
-        <View style={styles.details}>
-          <View alignItems='center'>
-            <Text style={styles.info}>Loan ID: {loan.LoanID}</Text>
-          </View>
-        </View>
-        <View style={styles.details}>
-          <View alignItems='center'>
-            <Text style={styles.info}>Recipient: {loan.recipient}</Text>
-          </View>
-        </View>
-        <View style={styles.details}>
-          <View alignItems='center'>
-            <Text style={styles.info}>Amount: {loan.amount}</Text>
-          </View>
-        </View>
-        <View style={styles.details}>
-          <View alignItems='center'>
-            <Text style={styles.info}>Funded Amount: {loan.fundedAmount}</Text>
-          </View>
-        </View>
-        <View style={styles.details}>
-          <View alignItems='center'>
-            <Text style={styles.info}>Interest Rate: {loan.interestRate}</Text>
-          </View>
-        </View>
-        <View style={styles.details}>
-          <View alignItems='center'>
-            <Text style={styles.info}>Term Months: {loan.termMonths}</Text>
-          </View>
-        </View>
-        <View style={styles.details}>
-          <View alignItems='center'>
-            <Text style={styles.info}>Purpose: {loan.purpose}</Text>
-          </View>
-        </View>
-        <View style={styles.details}>
-          <View alignItems='center'>
-          <Text style={styles.info}>Status: {loan.status}</Text>
-          </View>
-        </View>
+        <Text style={styles.title}>Loan Details</Text>
+        <Image source={{ uri: loan.Link }} style={styles.image} />
+        <DetailView label="Recipient" value={loan.recipient} />
+        <DetailView label="Seeking" value={`$${loan.amount}`} />
+        <DetailView label="Funded Amount" value={loan.fundedAmount.toString()} />
+        <DetailView label="Interest Rate" value={loan.interestRate} />
+        <DetailView label="Term (Months)" value={loan.termMonths} />
+        <DetailView label="Purpose" value={loan.purpose} />
+        <DetailView label="Status" value={loan.status} />
         <View style={styles.description}>
-          <View alignItems='center'>
-            <Text style={styles.speech}>{loan.speech}</Text>
-          </View>
+          <Text style={styles.speech}>{loan.speech}</Text>
         </View>
-          
         <View style={styles.amountInputContainer}>
           <Text style={styles.amountInputLabel}>Enter amount to contribute:</Text>
           <TextInput
@@ -92,11 +65,18 @@ const LoanDetailsScreen = ({ route }) => {
         <TouchableOpacity style={styles.joinButton} onPress={join}>
           <Text style={styles.joinButtonText}>Join</Text>
         </TouchableOpacity>
-        <Text marginBottom={-270}></Text>
       </View>
     </ScrollView>
   );
 };
+
+const DetailView = ({ label, value }) => (
+  <View style={styles.details}>
+    <Text style={styles.info}>
+      {label}: {value}
+    </Text>
+  </View>
+);
 
 const styles = StyleSheet.create({
   scrollViewContent: {
@@ -108,23 +88,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white'
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  card: {
-    backgroundColor: '#f0f0f0',
-    padding: 20,
-    borderRadius: 10,
-    width: '80%',
-    alignItems: 'center',
+    marginBottom: 20,
+    marginTop: 20,
+    fontFamily: 'Arial', // Change to your preferred font
   },
   image: {
     width: 370,
     height: 200,
+    marginBottom: 20,
+  },
+  details: {
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    borderRadius: 10,
+    width: '80%',
+    alignItems: 'center',
     marginBottom: 10,
   },
   info: {
@@ -141,52 +123,34 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   amountInputLabel: {
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 10,
+    fontFamily: 'Arial', // Change to your preferred font
   },
   amountInput: {
     width: '80%',
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
-    paddingVertical: 8,
+    paddingVertical: 10,
     paddingHorizontal: 12,
-    fontSize: 16,
+    fontSize: 18,
+    marginBottom: 10,
+    fontFamily: 'Arial', // Change to your preferred font
   },
   joinButton: {
     backgroundColor: 'blue',
-    paddingVertical: 10,
+    width: '80%',
+    paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 5,
-    marginBottom: 300,
+    borderRadius: 10,
     marginTop: 20,
+    alignItems: 'center',
   },
   joinButtonText: {
     color: 'white',
-    fontSize: 16,
-  },
-  details: {
-    backgroundColor: 'white',
-    padding: 5,
-    borderRadius: 25,
-    width: '60%',
-    height: '3.9%',
-    alignItems: 'center',
-    marginBottom: 15,
-    borderWidth: 1,
-    alignSelf: 'center',
-
-  },
-  description: {
-    backgroundColor: 'white',
-    padding: 5,
-    borderRadius: 25,
-    width: '95%',
-    height: '10%',
-    alignItems: 'center',
-    marginBottom: 0,
-    borderWidth: 1,
-    alignSelf: 'center',
+    fontSize: 20,
+    fontFamily: 'Arial', // Change to your preferred font
   },
 });
 

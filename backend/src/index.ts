@@ -2,200 +2,202 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { html } from 'hono/html';
 
-import { createListing, updateNewLenders, updateStatusFinished, getListing, getAllListings} from "./listings";
+import { createListing, updateNewLenders, updateStatusFinished, getListing, getAllListings } from "./listings";
 import { initUser, getUser, updateUser } from "./userData";
+import request from "wrangler";
 
-type Bindings = {
+export interface Env {
+	DB: D1Database;
+}
+
+export default {
+	async fetch(request: Request, env: Env) {
+		const { pathname } = new URL(request.url);
+
+		if (pathname === "/listings/getAll") {
+			// If you did not use `DB` as your binding name, change it here
+			const { results } = await env.DB.prepare(
+				"SELECT * FROM listings"
+			)
+				.all();
+			return Response.json(results);
+		}
+
+		else if (request.method === "POST" && pathname === "/auth/initUser") {
+			const { access_token, refresh_token, email, address, password, profileImgLink, creditScore, first_name, last_name }: { access_token: string, refresh_token: string, email: string, address: string, password: string, profileImgLink: string, creditScore: number, first_name: string, last_name: string } = await request.clone().json();
+
+			const queryOne = `INSERT INTO auth (email, password, access_token, refresh_token) VALUES ("${email}", "${password}", "${access_token}", "${refresh_token}")`;
+			console.log(queryOne);
+			const authPrep = await env.DB.prepare(queryOne).all();
+			console.log(email);
+			const queryTwo = `SELECT * FROM auth`;
+			const authPrepTwo = await env.DB.prepare(queryTwo).all();
+			const user_id = authPrepTwo.results[0].userid;
+			console.log("user_id " + user_id);
+			const queryThree = `INSERT INTO user_data (userid, address, profleimagelink, credit_score, first_name, last_name) VALUES (${user_id}, "${address}", "${profileImgLink}", ${creditScore}, "${first_name}", "${last_name}")`;
+			const userPrep = await env.DB.prepare(queryThree).all();
+			return Response.json(userPrep);
+			/* const queryTwo = `SELECT
+			* FROM auth WHERE email = "${email}"`;
+			const authPrepTwo = await env.DB.prepare(queryTwo).all(); */
+			// grab user_id from authPrepTwo
+			/* const json = Response.json(authPrepTwo); */
+			/* 	const queryThree = `INSERT INTO user_data (userid, address, profleimagelink, credit_score, first_name, last_name) VALUES (${user_id}, "${address}", "${profileImgLink}", ${creditScore}, "${first_name}", "${last_name}")`;
+				console.log(queryThree);
+				const userPrep = await env.DB.prepare(queryThree).all(); */
+
+
+
+
+
+			/* onst requestBody = await request.json();
+		const access_token = requestBody.access_token;
+		const refresh_token = requestBody.refresh_token;
+		const email = requestBody.email;
+		const password = "password";
+		const queryOne = `INSERT INTO auth (email, password, access_token, refresh_token) VALUES (${email}, ${password}, ${access_token}, ${refresh_token})`;
+		const authPrep = request.env.DB.prepare(queryOne);
+		const authExecution = request.env.DB.exec(authPrep);
+		const address = requestBody.address;
+		const profileImgLink = requestBody.profileImgLink;
+		const creditScore = requestBody.creditScore;
+		const first_name = requestBody.first_name;
+		const last_name = requestBody.last_name; */
+		}
+		if (pathname === "/listings/viewProfile") {
+
+		}
+		if (pathname === "/listings/getListing") {
+
+		}
+
+		return new Response(
+			"Call /api/beverages to see everyone who works at Bs Beverages"
+		);
+	},
+};
+
+//View Profile
+
+//Create Listing/Loan
+
+//getListing
+
+//Join Button
+
+//Create User
+
+/*type Bindings = {
 	DB: D1Database;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
 app.use('/*', cors());
 
-
-// app.get('/auth/exists', async (c) => {
-// 	// check if the user exists
-// 	const email = c.req.query('email');
-// 	console.log("Printing email" + email);
-// 	const query = `SELECT * FROM [User] WHERE email = "${email}"`;
-// 	const user = await c.env.DB.prepare(query);;
-// 	console.log("Printing user" + user);
-// 	return c.json({ exists: !!user });
-// });
-//
-// app.get('/auth/login', async (c) => {
-// 	console.log("Printing email" + c.req.query('email'));
-// 	console.log("Printing password" + c.req.query('password'));
-// 	const query = `SELECT * FROM [User] WHERE email = "${c.req.query('email')}" AND password = "${c.req.query('password')}"`;
-// 	const user = await c.env.DB.prepare(query);
-// 	return c.json(user);
-// });
-//
-// app.post('/auth/register', async (c) => {
-// 	const email = c.req.query('email');
-// 	const password = c.req.query('password');
-// 	const query = `INSERT INTO [User] (email, password) VALUES ("${email}", "${password}")`;
-// 	const user = await c.env.DB.prepare(query);
-// 	return c.json(user);
-// });
-//
-// app.get('/users', async (c) => {
-// 	const query = `SELECT * FROM [User]`;
-// 	const user = c.env.DB.prepare(query);
-// 	return c.json(user);
-// });
-
-app.post('/listings/create', async (c) => {
-	return createListing(c);
-});
-
-// updating loaning table when add a new lender with concat lender id and lender amount
-app.put('/listings/update/newLenders', async (c) => {
-	return updateNewLenders(c);
-});
-
-// update the listing once goal is reached
-app.put('/listings/update/status/finished', async (c) => {
-	return updateStatusFinished(c);
-});
-
-app.get('/listings/getOne', async (c) => {
-	return getListing(c);
-});
-
-app.get('/listings/getAll', async (c) => {
-	return getAllListings(c);
-});
-
-app.post('/users/init', async (c) => {
-	return initUser(c);
-});
-
-app.get('/users/get', async (c) => {
-	return getUser(c);
-});
-
-app.put('/users/update', async (c) => {
-	return updateUser(c);
-});
+const worker: ExportedHandler<Bindings> = {
+	async fetch(req, env) {
+		const url = new URL(req.url);
+		const method = req.method;
+		const path = url.pathname.replace(/[/]$/, '');
+		const userID = url.searchParams.get('_id') || '';
 
 
 
-/* app.get('/users/:id', async (c) => {
-	const { id } = c.req.param;
-	const query = `SELECT * FROM [User] WHERE id = ${id}`;
-	const user = await c.env.DB.prepare(query);
-	return c.json(user);
-}); */
 
+		try {
+			if (method === 'GET') {
+				// read the userid from the http request
+				const _id = await req.clone();
+				// GET /api/todos?id=XXX
+				// find the document that matches the given id
+				if (url.pathname.includes('users/get')) {
+					app.get('/users/get', async (request: any) => {
+						const requestBody = await request.clone();
+						return getUser(requestBody);
+					}
+				);
+				}
+				else if (url.pathname.includes('listings/getAll')) {
+					app.get('/listings/getAll', async (request: any) => {
+						const requestBody = await request.clone();
+						return getAllListings(requestBody);
+					}
+					);
+				}
 
-/* app.get('/auth', async c => {
-	await funcs.fetch(c.req, c.env, c);
-}); */
+				else if (url.pathname.includes('listings/getOne')) {
+					app.get('/listings/getOne', async (request: any) => {
+						const requestBody = await request.clone();
+						return getListing(requestBody);
+					}
+				);
+				}
+				else {
+					// return a json that says unknown method
+					return "Unknown method.";
+				}
+			}
 
-/* app.get('/', async c => {
-	const tables = await c.env.DB.prepare(
-		`SELECT name
-		FROM sqlite_schema
-		WHERE type = 'table'
-			AND name NOT LIKE 'sqlite_%'
-			AND name NOT LIKE '_cf_%'
-			AND name NOT LIKE 'd1_%'
-		ORDER BY name ASC;`
-	).all();
+			// POST /api/todos
+			if (method === 'POST') {
+				// create a new document
+				const data = await req.clone().json();
+				if (url.pathname.includes('users/init')) {
+					app.post('/users/init', async (request: any) => {
+						const requestBody = await request.clone();
+						return initUser(requestBody);
+					}
+				);
+				}
+				else if (url.pathname.includes('listings/create')) {
+					app.post('/listings/create', async (request: any) => {
+						const requestBody = await request.clone();
+						return createListing(requestBody);
+					}
+				);
+				}
+				else {
+					// return a json that says unknown method
+					return "Unknown method.";
+				}
+			}
 
-	return c.html(html`<!DOCTYPE html>
-		<html>
-			<head>
-				<meta charset="UTF-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<title>D1 Worker</title>
-				<link
-					rel="stylesheet"
-					href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css"
-				/>
-			</head>
-			<body style="padding: 1em 2em">
-				${tables.results.map(
-					row =>
-						html`<div>
-							<a href="${new URL(`/api/${row.name}`, c.req.url)}">${row.name}</a>
-						</div>`
-				)}
-			</body>
-		</html>`);
-});
+			// PATCH /api/todos?id=XXX&done=true
+			if (method === 'PUT') {
+				// update the document
+				const data = await req.clone().json();
+				if (url.pathname.includes('users/update')) {
+					app.put('/users/update', async (request: any) => {
+						const requestBody = await request.clone();
+						return updateUser(requestBody);
+					}
+				);
+				}
+				else if (url.pathname.includes('listings/update/newLenders')) {
+					app.put('/listings/update/newLenders', async (request: any) => {
+						const requestBody = await request.clone();
+						return updateNewLenders(requestBody);
+					}
+				);
+				}
+				else if (url.pathname.includes('listings/update/status/finished')) {
+					app.put('/listings/update/status/finished', async (request: any) => {
+						const requestBody = await request.clone();
+						return updateStatusFinished(requestBody);
+					}
+				);
+				}
+				else {
+					// return a json that says unknown method
+					return "Unknown method.";
+				}
+			}
+		} catch (err) {
+			const msg = (err as Error).message || 'Error with query.';
+			return new Response(msg, { status: 500 });
+		}
+	}
+}
 
-app.get('/api/Category', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [Category]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/Customer', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [Customer]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/customercustomerDemo', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [CustomerCustomerDemo]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/CustomerDemographic', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [CustomerDemographic]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/Employee', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [Employee]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/EmployeeTerritory', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [EmployeeTerritory]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/Order', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [Order]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/OrderDetail', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [OrderDetail]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/Product', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [Product]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/Region', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [Region]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/Shipper', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [Shipper]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/Supplier', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [Supplier]`).all();
-	return c.json(resp.results);
-});
-
-app.get('/api/Territory', async c => {
-	const resp = await c.env.DB.prepare(`SELECT * FROM [Territory]`).all();
-	return c.json(resp.results);
-}); */
-
-app.onError((err, c) => {
-	console.error(`${err}`);
-	return c.text(err.toString());
-});
-
-app.notFound(c => c.text('Not found', 404));
-
-export default app;
+// Export for discoverability
+export default app;*/

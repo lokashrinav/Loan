@@ -2,6 +2,14 @@ import * as React from 'react';
 import { Divider } from '@rneui/themed';
 import { View, Text, StyleSheet, Image, FlatList, ScrollView } from 'react-native';
 import Footer from './Footer.js';
+import * as Font from 'expo-font';
+
+const loadFonts = async () => {
+  await Font.loadAsync({
+    Georgia: require('./assets/Georgia.ttf'),
+  });
+};
+loadFonts();
 
 const ViewProfileScreen = ({ route, navigation }) => {
   const { profile } = route.params;

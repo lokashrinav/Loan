@@ -16,7 +16,7 @@ import axios from 'axios';
 
 //Client secret: 33c6f6835b01d22ea282196be8585c741cb3a17c5d28ffaefdbc3986ed55ec93489895d5840a92c20e5285f62449b7c0
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
   // Discovery document for OAuth endpoints
   const discoveryDocument = getDiscoveryDocument();
 
@@ -100,6 +100,38 @@ export default function LoginScreen({navigation}) {
             console.log('result', result);
             if (result.type === 'success') {
               console.log('Login successful');
+              // run api call to post data
+              const myHeaders = new Headers();
+              myHeaders.append("Content-Type", "application/json");
+              // go through exchangeTopicResponse and get the email
+              const exchangeTokenResponseString = JSON.stringify(exchangeTokenResponse);
+              const rawObject = JSON.parse(raw);
+              const email = rawObject.email;
+              const first_name = rawObject.first_name;
+              const last_name = rawObject.last_name;
+              const raw = JSON.stringify({
+                "access_token": await AsyncStorage.getItem('accessToken'),
+                "refresh_token": await AsyncStorage.getItem('refreshToken'),
+                "email": email,
+                "address": "123 Main St, Anytown, USA",
+                "password": "password123",
+                "profileImgLink": "https://example.com/profile.jpg",
+                "creditScore": 750,
+                "first_name": first_name,
+                "last_name": last_name
+              });
+
+              const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
+              };
+
+              fetch("https://backend_bit_camp2024.duckman848.workers.dev/auth/initUser", requestOptions)
+                .then((response) => response.text())
+                .then((result) => console.log(result))
+                .catch((error) => console.error(error));
               // Navigate to HomePage after a successful login
               navigation.navigate('Home');
             }

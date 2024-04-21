@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 2,
         borderColor: 'black',
         position: 'absolute',
-        top: 665,
+        top: 700,
         left: 0,
         right: 0,
     },
