@@ -1,5 +1,6 @@
 import { getDiscoveryDocument } from './DiscoveryDocument';
 import * as AuthSession from 'expo-auth-session';
+import { useAuthRequest } from 'expo-auth-session';
 import React, { useState } from 'react'
 import { Alert, Button, Image, Pressable, SafeAreaView, StyleSheet, Switch, Text, TextInput, View } from 'react-native'
 
