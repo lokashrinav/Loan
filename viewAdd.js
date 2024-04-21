@@ -1,91 +1,76 @@
 import * as React from 'react';
 import { Divider, Input, Button } from '@rneui/themed';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView, FlatList, SafeAreaView } from 'react-native';
+import { Alert } from 'react-native';
 
 const ViewAddScreen = ({ route }) => {
   const { profile } = route.params;
-  const [value, onChangeText] = React.useState('');
-  const loansData = require('./tempData.json');
+  const [interestRate, setInterestRate] = React.useState('');
+  const [loanAmount, setLoanAmount] = React.useState('');
+  const [termMonths, setTermMonths] = React.useState('');
+  const [description, setDescription] = React.useState('');
+
+  const handlePostButtonPress = () => {
+    // Your logic for posting the loan data
+    // Alert when the loan is posted successfully
+    Alert.alert('Loan is currently in review. We will post it for you shortly!');
+
+    // Clear input fields after posting
+    setInterestRate('');
+    setLoanAmount('');
+    setTermMonths('');
+    setDescription('');
+  };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={styles.container}>
-        <Text style={styles.title} marginBottom={25}> Post New Request</Text>
-        <Input 
-            placeholder='Please Enter Your Desired Interest Rate'
-            style={{
-                padding: 10,
-                borderWidth: 0.7,
-                borderColor: 'black',
-                borderRadius: 10,
-            }}
-            />
-        <Text style={styles.minilabel}> Desired Interest Rate</Text>
-        <Input 
-            placeholder='Please Enter Your Desired Loan Amount'
-            style={{
-                padding: 10,
-                borderWidth: 0.7,
-                borderColor: 'black',
-                borderRadius: 10,
-            }}
-            />
-        <Text style={styles.minilabel}> Desired Loan Amount</Text>
-        <Input 
-            placeholder='Please Enter Your Desired Months Term' 
-            style={{
-                padding: 10,
-                borderWidth: 0.7,
-                borderColor: 'black',
-                borderRadius: 10,
-            }}
-            />
-        <Text style={styles.minilabel}> Desired Month Term</Text>
-        <TextInput
-            editable
-            multiline
-            numberOfLines={4}
-            maxLength={40000000000}
-            onChangeText={text => onChangeText(text)}
-            value={value}
-            style={{
-                padding: 10,
-                borderWidth: 0.7,
-                borderColor: 'black',
-                borderRadius: 10,
-                height: 100,
-                width: 370
-            }}
-            marginTop={7}        
-            placeholder="Please Enter Description..."
-        />
-        <Text style={styles.minilabel} marginTop={2} marginLeft={8}> Description</Text>
-        <Button
-              title="Post"
-              buttonStyle={{ backgroundColor: 'rgba(39, 39, 39, 1)' }}
-              containerStyle={{
-                width: 200,
-                marginHorizontal: 50,
-                marginVertical: 10,
-              }}
-              titleStyle={{ color: 'white', marginHorizontal: 20 }}
-            />
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <Text style={styles.title} marginBottom={25}> Post New Request</Text>
+      <Input
+        placeholder='Please Enter Your Desired Interest Rate'
+        style={styles.input}
+        onChangeText={setInterestRate}
+        value={interestRate}
+      />
+      <Input
+        placeholder='Please Enter Your Desired Loan Amount'
+        style={styles.input}
+        onChangeText={setLoanAmount}
+        value={loanAmount}
+      />
+      <Input
+        placeholder='Please Enter Your Desired Months Term'
+        style={styles.input}
+        onChangeText={setTermMonths}
+        value={termMonths}
+      />
+      <TextInput
+        editable
+        multiline
+        numberOfLines={4}
+        maxLength={40000000000}
+        onChangeText={setDescription}
+        value={description}
+        style={styles.textArea}
+        marginTop={7}
+        placeholder="Please Enter Description..."
+      />
+      <Button
+        title="Post"
+        buttonStyle={styles.postButton}
+        containerStyle={styles.buttonContainer}
+        titleStyle={styles.buttonTitle}
+        onPress={handlePostButtonPress}
+      />
+    </View>
   );
 };
 
-
 const styles = StyleSheet.create({
-  scrollViewContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
-  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'top',
+    justifyContent: 'center',
     backgroundColor: 'white',
   },
   title: {
@@ -95,14 +80,34 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontFamily: 'Georgia'
   },
-  minilabel: {
-    marginTop: -20,
-    marginBottom: 10,
-    marginLeft: 8,
-    fontSize: 12,
-    alignSelf: "left",
-    fontStyle: 'italic'
-  }
+  input: {
+    padding: 10,
+    borderWidth: 0.7,
+    borderColor: 'black',
+    borderRadius: 10,
+    width: 370,
+  },
+  textArea: {
+    padding: 10,
+    borderWidth: 0.7,
+    borderColor: 'black',
+    borderRadius: 10,
+    height: 100,
+    width: 370,
+    marginTop: 7,
+  },
+  buttonContainer: {
+    width: 200,
+    marginHorizontal: 50,
+    marginVertical: 10,
+  },
+  postButton: {
+    backgroundColor: 'rgba(39, 39, 39, 1)',
+  },
+  buttonTitle: {
+    color: 'white',
+    marginHorizontal: 20,
+  },
 });
 
 export default ViewAddScreen;
