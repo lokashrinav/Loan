@@ -89,7 +89,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
 
-      <Text style={styles.title}>Welcome To InsertName</Text>
+      <Text style={styles.title}>Welcome To PerLoan</Text>
 
       <View style={styles.buttonView}>
         <Button
@@ -102,36 +102,36 @@ export default function LoginScreen({ navigation }) {
               console.log('Login successful');
               // run api call to post data
               const myHeaders = new Headers();
-              myHeaders.append("Content-Type", "application/json");
-              // go through exchangeTopicResponse and get the email
-              const exchangeTokenResponseString = JSON.stringify(exchangeTokenResponse);
-              const rawObject = JSON.parse(raw);
-              const email = rawObject.email;
-              const first_name = rawObject.first_name;
-              const last_name = rawObject.last_name;
-              const raw = JSON.stringify({
-                "access_token": await AsyncStorage.getItem('accessToken'),
-                "refresh_token": await AsyncStorage.getItem('refreshToken'),
-                "email": email,
-                "address": "123 Main St, Anytown, USA",
-                "password": "password123",
-                "profileImgLink": "https://example.com/profile.jpg",
-                "creditScore": 750,
-                "first_name": first_name,
-                "last_name": last_name
-              });
+              // myHeaders.append("Content-Type", "application/json");
+              // // go through exchangeTopicResponse and get the email
+              // const exchangeTokenResponseString = JSON.stringify(exchangeTokenResponse);
+              // const rawObject = JSON.parse(raw);
+              // const email = rawObject.email;
+              // const first_name = rawObject.first_name;
+              // const last_name = rawObject.last_name;
+              // const raw = JSON.stringify({
+              //   "access_token": await AsyncStorage.getItem('accessToken'),
+              //   "refresh_token": await AsyncStorage.getItem('refreshToken'),
+              //   "email": email,
+              //   "address": "123 Main St, Anytown, USA",
+              //   "password": "password123",
+              //   "profileImgLink": "https://example.com/profile.jpg",
+              //   "creditScore": 750,
+              //   "first_name": first_name,
+              //   "last_name": last_name
+              // });
 
-              const requestOptions = {
-                method: "POST",
-                headers: myHeaders,
-                body: raw,
-                redirect: "follow"
-              };
+              // const requestOptions = {
+              //   method: "POST",
+              //   headers: myHeaders,
+              //   body: raw,
+              //   redirect: "follow"
+              // };
 
-              fetch("https://backend_bit_camp2024.duckman848.workers.dev/auth/initUser", requestOptions)
-                .then((response) => response.text())
-                .then((result) => console.log(result))
-                .catch((error) => console.error(error));
+              // fetch("https://backend_bit_camp2024.duckman848.workers.dev/auth/initUser", requestOptions)
+              //   .then((response) => response.text())
+              //   .then((result) => console.log(result))
+              //   .catch((error) => console.error(error));
               // Navigate to HomePage after a successful login
               navigation.navigate('Home');
             }

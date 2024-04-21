@@ -1,7 +1,7 @@
 {
     "users": [
       {
-        "credit": "C+",
+        "credit": "640",
         "id": "4",
         "name": "Michael Brown",
         "email": "michael.brown@example.com",
@@ -22,7 +22,7 @@
         "profileImage": "http://images.dinosaurpictures.org/dinosaurs-tyrannosaurus_00336745_13a8.jpg"
       },
       {
-        "credit": "B-",
+        "credit": "700",
         "id": "5",
         "name": "Emily Wilson",
         "email": "emily.wilson@example.com",
@@ -43,7 +43,7 @@
         "profileImage": "https://example.com/profile_images/emily_wilson.jpg"
       },
       {
-        "credit": "B+",
+        "credit": "780",
         "id": "6",
         "name": "David Lee",
         "email": "david.lee@example.com",
@@ -64,7 +64,7 @@
         "profileImage": "https://example.com/profile_images/david_lee.jpg"
       },
       {
-        "credit": "B",
+        "credit": "740",
         "id": "7",
         "name": "Olivia Martinez",
         "email": "olivia.martinez@example.com",
@@ -85,7 +85,7 @@
         "profileImage": "https://example.com/profile_images/olivia_martinez.jpg"
       },
       {
-        "credit": "B",
+        "credit": "730",
         "id": "8",
         "name": "James Rodriguez",
         "email": "james.rodriguez@example.com",
@@ -106,7 +106,7 @@
         "profileImage": "https://example.com/profile_images/james_rodriguez.jpg"
       },
       {
-        "credit": "A",
+        "credit": "830",
         "id": "9",
         "name": "Sophia Taylor",
         "email": "sophia.taylor@example.com",
@@ -127,7 +127,7 @@
         "profileImage": "https://example.com/profile_images/sophia_taylor.jpg"
       },
       {
-        "credit": "A+",
+        "credit": "850",
         "id": "10",
         "name": "William Clark",
         "email": "william.clark@example.com",

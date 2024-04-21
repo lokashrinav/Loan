@@ -5,39 +5,39 @@
         "groupMembers": ["John", "Alice", "Bob"],
         "recipientid": "21",
         "recipient": "Mary Ackins",
-        "Link": "http://images.dinosaurpictures.org/dinosaurs-tyrannosaurus_00336745_13a8.jpg",
+        "Link": "http://www.clipartbest.com/cliparts/4T9/6Md/4T96Md8qc.jpg",
         "amount": 5000,
         "fundedAmount": 50,
         "interestRate": "5.2%",
         "termMonths": 12,
         "purpose": "Home Improvement",
-        "status": "Unfunded",
+        "status": "Funding In Progress",
         "speech": "I'm Mary Ackins, a hardworking single mother. My home desperately needs repairs, and I can't afford them on my own. I need this loan to make my home safe and comfortable for my children."
       },
       {
         "LoanID": "L002",
         "groupMembers": ["Emily", "David", "Sophia"],
         "recipient": "Michael Ackins",
-        "Link": "http://images.dinosaurpictures.org/Allosaurus2_e7af.jpg",
+        "Link": "https://www.pngkey.com/png/full/16-169278_open-cartoon-money-bag-png.png",
         "amount": 3000,
         "fundedAmount": 500,
         "interestRate": "6.5%",
         "termMonths": 6,
         "purpose": "Debt Consolidation",
-        "status": "Unfunded",
+        "status": "Funding In Progress",
         "speech": "I'm Michael Ackins, and I've been struggling to pay off my debts for months. This loan will help me consolidate my debts and get my finances back on track."
       },
       {
         "LoanID": "L003",
         "groupMembers": ["Emma", "James", "Olivia"],
         "recipient": "Daniel Bob",
-        "Link": "http://images.dinosaurpictures.org/Sauroposeidon4_d2cf.jpg",
+        "Link": "http://www.clipartbest.com/cliparts/eiM/yo9/eiMyo9jRT.png",
         "amount": 8000,
         "fundedAmount": 8,
         "interestRate": "7.8%",
         "termMonths": 24,
         "purpose": "Education",
-        "status": "Unfunded",
+        "status": "Funding In Progress",
         "speech": "I'm Daniel Bob, and I believe that education is the key to a better future. This loan will allow me to pursue my dreams and further my education."
       },
       {
@@ -46,7 +46,7 @@
         "recipient": "Mary",
         "Link": "http://images.dinosaurpictures.org/dinosaurs-tyrannosaurus_00336745_13a8.jpg",
         "amount": 5000,
-        "fundedAmount": 500,
+        "fundedAmount": 0,
         "interestRate": "5.2%",
         "termMonths": 12,
         "purpose": "Home Improvement",
@@ -57,14 +57,14 @@
         "LoanID": "L005",
         "groupMembers": ["Emily", "David", "Sophia"],
         "recipient": "Michael",
-        "Link": "http://images.dinosaurpictures.org/dinosaurs-tyrannosaurus_00336745_13a8.jpg",
+        "Link": "http://www.clipartbest.com/cliparts/niB/Mzn/niBMznjqT.gif",
         "amount": 3000,
         "fundedAmount": 1000,
         "interestRate": "6.5%",
-        "termMonths": 6,
-        "purpose": "Debt Consolidation",
-        "status": "Unfunded",
-        "speech": "I'm Michael, and I've been overwhelmed by my debts. This loan will provide me with the financial relief I desperately need to get back on my feet."
+        "termMonths": 2,
+        "purpose": "Emergency Expense",
+        "status": "Funding In Progress",
+        "speech": "I urgently need cash to fix my car, so I am looking to take out a loan. I'll be able to pay it back within 2 months!"
       },
       {
         "LoanID": "L006",
@@ -76,7 +76,7 @@
         "interestRate": "7.8%",
         "termMonths": 24,
         "purpose": "Education",
-        "status": "Unfunded",
+        "status": "Funding In Progress",
         "speech": "I'm Daniel, and I'm passionate about learning. With this loan, I'll be able to pursue my education and unlock new opportunities for myself."
       }
     ]

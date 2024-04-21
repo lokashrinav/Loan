@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Divider } from '@rneui/themed';
-import { View, Text, StyleSheet, Image, FlatList, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList, ScrollView, Button } from 'react-native';
 import Footer from './Footer.js';
 import * as Font from 'expo-font';
+import logoutUser from './LoginScreen.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const loadFonts = async () => {
   await Font.loadAsync({
@@ -10,6 +12,16 @@ const loadFonts = async () => {
   });
 };
 loadFonts();
+
+
+let refreshToken = null;
+const refreshTokens = async () => {
+  const token = await AsyncStorage.getItem('refreshToken');
+  refreshToken = token;
+};
+// get refresh token
+refreshTokens();
+
 
 const ViewProfileScreen = ({ route, navigation }) => {
   const { profile } = route.params;
@@ -84,7 +96,9 @@ const ViewProfileScreen = ({ route, navigation }) => {
   );
 
   return (
+    
     <>
+    
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.container}>
           <Text style={styles.title}> My Profile</Text>
@@ -129,6 +143,12 @@ const ViewProfileScreen = ({ route, navigation }) => {
             marginBottom={-30}
           />
         </View>
+        <Button
+          title="Logout"
+          onPress={() => {
+            logoutUser();
+            navigation.navigate('Login');
+          }}></Button>
       </ScrollView>
       <Footer navigation={navigation} />
     </>
@@ -142,14 +162,14 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F5F5F5',
     alignItems: 'center',
     justifyContent: 'top',
     backgroundColor: 'white',
   },
   profile: {
     flexDirection: 'row',
-    backgroundColor: 'lightblue',
+    backgroundColor: '#F5F5F5',
     padding: 20,
     borderRadius: 25,
     width: '95%',
@@ -158,7 +178,7 @@ const styles = StyleSheet.create({
   },
   expenditure: {
     flexDirection: 'row',
-    backgroundColor: 'beige',
+    backgroundColor: '#F5F5F5',
     padding: 20,
     borderRadius: 25,
     width: '95%',
@@ -167,7 +187,7 @@ const styles = StyleSheet.create({
   },
   request: {
     flexDirection: 'row',
-    backgroundColor: '#FFE4C4',
+    backgroundColor: '#F5F5F5',
     padding: 20,
     borderRadius: 25,
     width: '95%',
