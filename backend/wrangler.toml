@@ -1,0 +1,8 @@
+name = "backend_bit_camp2024"
+main = "src/index.ts"
+compatibility_date = "2023-11-21"
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "backendBitCamp2024DB"
+database_id = "f6ca7a73-7abc-4118-b1ea-734cd1e2122f" # Replace with your ID from `wrangler d1 create`
