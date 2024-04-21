@@ -28,8 +28,11 @@ const ViewProfileScreen = ({ route, navigation }) => {
 
   const loansData = require('./tempData.json');
 
-  let postCount = 0;
-  let lendCount = 0;
+  const userData = require('./userData.json');
+
+
+  let postCount = 3;
+  let lendCount = 3;
 
   for (let i in loansData.users) {
     if (profile.id == loansData.recepientid) {
@@ -67,28 +70,30 @@ const ViewProfileScreen = ({ route, navigation }) => {
     },
   ];
 
+  let profile2 = userData["users"][2]
   const Item = ({ title }) => (
     <View style={styles.container}>
       <View style={styles.expenditure}>
-        <Image source={{ uri: profile.profileImage }} style={styles.image} />
+        <Image source={{ uri: profile2.profileImage }} style={styles.image} />
         <View alignItems='center'>
-          <Text style={styles.info}>Name: {profile.name}</Text>
-          <Text style={styles.email}>Email: {profile.email}</Text>
-          <Text style={styles.info}>Credit Score: {profile.credit}</Text>
+          <Text style={styles.info}>Name: {profile2.name}</Text>
+          <Text style={styles.email}>Email: {profile2.email}</Text>
+          <Text style={styles.info}>Credit Score: {profile2.credit}</Text>
           <Text style={styles.info}>Current Requests: {postCount}</Text>
         </View>
       </View>
     </View>
   );
 
+  let profile1 = userData["users"][1]
   const Item2 = ({ title }) => (
     <View style={styles.container}>
       <View style={styles.request}>
-        <Image source={{ uri: profile.profileImage }} style={styles.image} />
+        <Image source={{ uri: profile1.profileImage }} style={styles.image} />
         <View alignItems='center'>
-          <Text style={styles.info}>Name: {profile.name}</Text>
-          <Text style={styles.email}>Email: {profile.email}</Text>
-          <Text style={styles.info}>Credit Score: {profile.credit}</Text>
+          <Text style={styles.info}>Name: {profile1.name}</Text>
+          <Text style={styles.email}>Email: {profile1.email}</Text>
+          <Text style={styles.info}>Credit Score: {profile1.credit}</Text>
           <Text style={styles.info}>Current Requests: {postCount}</Text>
         </View>
       </View>
