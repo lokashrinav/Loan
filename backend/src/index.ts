@@ -3,6 +3,7 @@ import { cors } from 'hono/cors';
 import { html } from 'hono/html';
 
 import { createListing, updateNewLenders, updateStatusFinished, getListing, getAllListings} from "./listings";
+import { initUser, getUser, updateUser } from "./userData";
 
 type Bindings = {
 	DB: D1Database;
@@ -64,6 +65,18 @@ app.get('/listings/getOne', async (c) => {
 
 app.get('/listings/getAll', async (c) => {
 	return getAllListings(c);
+});
+
+app.post('/users/init', async (c) => {
+	return initUser(c);
+});
+
+app.get('/users/get', async (c) => {
+	return getUser(c);
+});
+
+app.put('/users/update', async (c) => {
+	return updateUser(c);
 });
 
 

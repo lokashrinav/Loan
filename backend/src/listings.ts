@@ -8,10 +8,12 @@ export const createListing = async (c: any) => {
 	const user_id = c.body('user_id');
 	const amount = c.body('amount');
 	const description = c.body('description');
-	const query = `INSERT INTO listings (recipient_id, amount, description, status) VALUES (${user_id}, ${amount}, ${description}, 'Seeking Lenders')`;
+	const loan_term = c.body('loan_term');
+	const recipient = c.body('recipient');
+	const query = `INSERT INTO listings (recipient_id, amount, description, status, loan_term, recipient) VALUES (${user_id}, ${amount}, ${description}, 'Seeking Lenders', ${loan_term}, ${recipient})`;
 	const listing = c.env.DB.prepare(query);
 	const loan_id = listing.first('loan_id');
-	const loan_query = `INSERT INTO loans (loan_id, amount) VALUES (${loan_id}, ${amount})`;
+	const loan_query = `INSERT INTO loans (loan_id, amount, funding) VALUES (${loan_id}, ${amount}, 0)`;
 	const loan = c.env.DB.prepare(loan_query);
 	const joint = {listing, loan};
 	return c.json(joint);
@@ -52,3 +54,5 @@ export const getAllListings = async (c: any) => {
 	const listings = c.env.DB.prepare(query);
 	return c.json(listings);
 };
+
+
