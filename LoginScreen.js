@@ -33,8 +33,6 @@ useEffect(() => {
         getToken();
     }
 }, [response]);
-
-<Button disabled={!request} title="Login" onPress={() => promptAsync()} />
 //go to IntroScreen.js
 
 export default function LoginScreen() {
@@ -64,9 +62,7 @@ export default function LoginScreen() {
         </View>
 
         <View style={styles.buttonView}>
-            <Pressable style={styles.button} onPress={() => Alert.alert("Login Successfuly!","see you in my instagram if you have questions : must_ait6")}>
-                <Text style={styles.buttonText}>LOGIN</Text>
-            </Pressable>
+            <Button disabled={!request} title="Login" onPress={() => promptAsync()} />
             <Text style={styles.optionsText}>OR LOGIN WITH</Text>
         </View>
 
