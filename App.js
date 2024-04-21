@@ -6,6 +6,7 @@ import ViewProfileScreen from './viewProfile';
 import ViewAddScreen from './viewAdd';
 import ViewChatScreen from './viewChat';
 import ChatScreen from './Chat';
+import LoginScreen from './LoginScreen';
 
 const loansData = require('./tempData.json');
 
