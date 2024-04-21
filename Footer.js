@@ -31,7 +31,7 @@ const Footer = ({ navigation }) => {
                 />             
             </TouchableOpacity>
             <TouchableOpacity style={styles.notificationsArea} onPress={handleChatPress}>
-                <Image source={require('./chat.png')}
+                <Image source={require('./chat1.png')}
                 style={styles.image}
                 />        
             </TouchableOpacity>      
