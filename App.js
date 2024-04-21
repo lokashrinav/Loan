@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './HomePage'; // Import your home page component
 import LoanDetailsScreen from './LoanDetailsScreen'; // Import your loan details screen component
 import ViewProfileScreen from './viewProfile';
+import ViewAddScreen from './viewAdd';
+import ViewNotificationScreen from './viewNotification';
 
 const loansData = require('./tempData.json');
 
@@ -13,6 +15,8 @@ const Stack = createNativeStackNavigator();
 currentUser = 0
 
 export default function App() {
+
+
   const current = {
     "credit": "C+",
     "id": "4",
@@ -48,6 +52,8 @@ export default function App() {
           />
         ))}
         <Stack.Screen name="viewProfile" component={ViewProfileScreen} initialParams={{ profile: current }} />
+        <Stack.Screen name="viewAdd" component={ViewAddScreen} initialParams={{ profile: current }} />
+        <Stack.Screen name="viewNotification" component={ViewNotificationScreen} initialParams={{ profile: current }} />
         </Stack.Navigator>
     </NavigationContainer>
   );

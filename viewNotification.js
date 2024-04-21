@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Divider } from '@rneui/themed';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView, FlatList, SafeAreaView } from 'react-native';
 
-const ViewProfileScreen = ({ route }) => {
+const ViewNotificationScreen = ({ route }) => {
   const { profile } = route.params;
 
   const loansData = require('./tempData.json');
@@ -251,4 +251,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ViewProfileScreen;
+export default ViewNotificationScreen;

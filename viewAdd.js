@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Divider } from '@rneui/themed';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView, FlatList, SafeAreaView } from 'react-native';
 
-const ViewProfileScreen = ({ route }) => {
+const ViewAddScreen = ({ route }) => {
   const { profile } = route.params;
 
   const loansData = require('./tempData.json');
@@ -79,11 +79,11 @@ const ViewProfileScreen = ({ route }) => {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
-        <Text style={styles.title}> My Profile</Text>
+        <Text style={styles.title}> Post New Request</Text>
         <View style={styles.profile}>
           <Image source={{ uri: profile.profileImage }} style={styles.image} />
           <View alignItems='center'>
-            <Text style={styles.info}>Name: {profile.name}</Text>
+            <Text style={styles.info}>safdjgoaesidergjsoe: {profile.name}</Text>
             <Text style={styles.email}>Email: {profile.email}</Text>
             <Text style={styles.info}>Credit Score: {profile.credit}</Text>
             <Text style={styles.info}>Current Requests: {postCount}</Text>
@@ -251,4 +251,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ViewProfileScreen;
+export default ViewAddScreen;
