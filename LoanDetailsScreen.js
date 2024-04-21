@@ -25,11 +25,12 @@ const LoanDetailsScreen = ({ route }) => {
   };
 
   return (
+    
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
         <Text style={styles.title}>Loan Details</Text>
+        <Image source={{ uri: loan.Link }} style={styles.image} />
         <View style={styles.card}>
-          <Image source={{ uri: loan.Link }} style={styles.image} />
           <Text style={styles.info}>Loan ID: {loan.LoanID}</Text>
           <Text style={styles.info}>Recipient: {loan.recipient}</Text>
           <Text style={styles.info}>Amount: {loan.amount}</Text>
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray'
+    backgroundColor: 'white'
   },
   title: {
     fontSize: 20,
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 200,
+    width: 370,
     height: 200,
     marginBottom: 10,
   },

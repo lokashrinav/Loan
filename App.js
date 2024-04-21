@@ -4,8 +4,8 @@ import HomePage from './HomePage'; // Import your home page component
 import LoanDetailsScreen from './LoanDetailsScreen'; // Import your loan details screen component
 import ViewProfileScreen from './viewProfile';
 import ViewAddScreen from './viewAdd';
-import ViewNotificationScreen from './viewNotification';
-import LoginScreen from './LoginScreen';
+import ViewChatScreen from './viewChat';
+import ChatScreen from './Chat';
 
 const loansData = require('./tempData.json');
 
@@ -43,7 +43,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Login" component={LoginScreen} />
+        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
         <Stack.Screen name="Home" component={HomePage} />
         {loansData.loans.map((loan, index) => (
           <Stack.Screen
@@ -55,7 +55,8 @@ export default function App() {
         ))}
         <Stack.Screen name="viewProfile" component={ViewProfileScreen} initialParams={{ profile: current }} />
         <Stack.Screen name="viewAdd" component={ViewAddScreen} initialParams={{ profile: current }} />
-        <Stack.Screen name="viewNotification" component={ViewNotificationScreen} initialParams={{ profile: current }} />
+        <Stack.Screen name="viewChat" component={ViewChatScreen} initialParams={{ profile: current }} />
+        <Stack.Screen name="Chat" component={ChatScreen} initialParams={{ profile: current }} />
         </Stack.Navigator>
     </NavigationContainer>
   );
