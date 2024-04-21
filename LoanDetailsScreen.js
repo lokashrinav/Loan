@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Input } from '@rneui/themed';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { Alert } from 'react-native';
 
@@ -25,36 +26,73 @@ const LoanDetailsScreen = ({ route }) => {
   };
 
   return (
+    
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
-        <Text style={styles.title}>Loan Details</Text>
-        <View style={styles.card}>
-          <Image source={{ uri: loan.Link }} style={styles.image} />
-          <Text style={styles.info}>Loan ID: {loan.LoanID}</Text>
-          <Text style={styles.info}>Recipient: {loan.recipient}</Text>
-          <Text style={styles.info}>Amount: {loan.amount}</Text>
-          <Text style={styles.info}>Funded Amount: {loan.fundedAmount}</Text>
-          <Text style={styles.info}>Interest Rate: {loan.interestRate}</Text>
-          <Text style={styles.info}>Term Months: {loan.termMonths}</Text>
-          <Text style={styles.info}>Purpose: {loan.purpose}</Text>
-          <Text style={styles.info}>Status: {loan.status}</Text>
-          <Text style={styles.speech}>{loan.speech}</Text>
-          <View style={styles.amountInputContainer}>
-            <Text style={styles.amountInputLabel}>Enter amount to join:</Text>
-            <TextInput
-              style={styles.amountInput}
-              keyboardType="numeric"
-              value={joinAmount}
-              onChangeText={text => setJoinAmount(text)}
-              placeholder="0"
-              placeholderTextColor="#999"
-              maxLength={5} // Limiting to 5 digits
-            />
+        <Text style={styles.title} marginTop={20}>Loan Details</Text>
+        <Image source={{ uri: loan.Link }} style={styles.image} marginBottom={20}/>
+        <View style={styles.details}>
+          <View alignItems='center'>
+            <Text style={styles.info}>Loan ID: {loan.LoanID}</Text>
           </View>
-          <TouchableOpacity style={styles.joinButton} onPress={join}>
-            <Text style={styles.joinButtonText}>Join</Text>
-          </TouchableOpacity>
         </View>
+        <View style={styles.details}>
+          <View alignItems='center'>
+            <Text style={styles.info}>Recipient: {loan.recipient}</Text>
+          </View>
+        </View>
+        <View style={styles.details}>
+          <View alignItems='center'>
+            <Text style={styles.info}>Amount: {loan.amount}</Text>
+          </View>
+        </View>
+        <View style={styles.details}>
+          <View alignItems='center'>
+            <Text style={styles.info}>Funded Amount: {loan.fundedAmount}</Text>
+          </View>
+        </View>
+        <View style={styles.details}>
+          <View alignItems='center'>
+            <Text style={styles.info}>Interest Rate: {loan.interestRate}</Text>
+          </View>
+        </View>
+        <View style={styles.details}>
+          <View alignItems='center'>
+            <Text style={styles.info}>Term Months: {loan.termMonths}</Text>
+          </View>
+        </View>
+        <View style={styles.details}>
+          <View alignItems='center'>
+            <Text style={styles.info}>Purpose: {loan.purpose}</Text>
+          </View>
+        </View>
+        <View style={styles.details}>
+          <View alignItems='center'>
+          <Text style={styles.info}>Status: {loan.status}</Text>
+          </View>
+        </View>
+        <View style={styles.description}>
+          <View alignItems='center'>
+            <Text style={styles.speech}>{loan.speech}</Text>
+          </View>
+        </View>
+          
+        <View style={styles.amountInputContainer}>
+          <Text style={styles.amountInputLabel}>Enter amount to contribute:</Text>
+          <TextInput
+            style={styles.amountInput}
+            keyboardType="numeric"
+            value={joinAmount}
+            onChangeText={text => setJoinAmount(text)}
+            placeholder="0"
+            placeholderTextColor="#999"
+            maxLength={5} // Limiting to 5 digits
+          />
+        </View>
+        <TouchableOpacity style={styles.joinButton} onPress={join}>
+          <Text style={styles.joinButtonText}>Join</Text>
+        </TouchableOpacity>
+        <Text marginBottom={-270}></Text>
       </View>
     </ScrollView>
   );
@@ -70,7 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray'
+    backgroundColor: 'white'
   },
   title: {
     fontSize: 20,
@@ -85,7 +123,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 200,
+    width: 370,
     height: 200,
     marginBottom: 10,
   },
@@ -126,6 +164,29 @@ const styles = StyleSheet.create({
   joinButtonText: {
     color: 'white',
     fontSize: 16,
+  },
+  details: {
+    backgroundColor: 'white',
+    padding: 5,
+    borderRadius: 25,
+    width: '60%',
+    height: '3.9%',
+    alignItems: 'center',
+    marginBottom: 15,
+    borderWidth: 1,
+    alignSelf: 'center',
+
+  },
+  description: {
+    backgroundColor: 'white',
+    padding: 5,
+    borderRadius: 25,
+    width: '95%',
+    height: '10%',
+    alignItems: 'center',
+    marginBottom: 0,
+    borderWidth: 1,
+    alignSelf: 'center',
   },
 });
 

@@ -9,8 +9,8 @@ const Footer = ({ navigation }) => {
     const handleAddPress = () => {
         navigation.navigate('viewAdd');
       };
-    const handleNotificationPress = () => {
-        navigation.navigate('viewNotification');
+    const handleChatPress = () => {
+        navigation.navigate('viewChat');
       };
 
     const handlePostPress = () => {
@@ -30,8 +30,8 @@ const Footer = ({ navigation }) => {
                 style={styles.image}
                 />             
             </TouchableOpacity>
-            <TouchableOpacity style={styles.notificationsArea} onPress={handleNotificationPress}>
-                <Image source={require('./notification.png')}
+            <TouchableOpacity style={styles.notificationsArea} onPress={handleChatPress}>
+                <Image source={require('./chat.png')}
                 style={styles.image}
                 />        
             </TouchableOpacity>      
