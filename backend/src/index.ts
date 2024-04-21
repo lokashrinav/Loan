@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { html } from 'hono/html';
 
+import { createListing, updateNewLenders, updateStatusFinished, getListing, getAllListings} from "./listings";
 
 type Bindings = {
 	DB: D1Database;
@@ -11,40 +12,59 @@ const app = new Hono<{ Bindings: Bindings }>();
 app.use('/*', cors());
 
 
-app.get('/auth/exists', async (c) => {
-	// check if the user exists
-	const email = c.req.query('email');
-	console.log("Printing email" + email);
-	const query = `SELECT * FROM [User] WHERE email = "${email}"`;
-	const user = await c.env.DB.prepare(query);;
-	console.log("Printing user" + user);
-	return c.json({ exists: !!user });
+// app.get('/auth/exists', async (c) => {
+// 	// check if the user exists
+// 	const email = c.req.query('email');
+// 	console.log("Printing email" + email);
+// 	const query = `SELECT * FROM [User] WHERE email = "${email}"`;
+// 	const user = await c.env.DB.prepare(query);;
+// 	console.log("Printing user" + user);
+// 	return c.json({ exists: !!user });
+// });
+//
+// app.get('/auth/login', async (c) => {
+// 	console.log("Printing email" + c.req.query('email'));
+// 	console.log("Printing password" + c.req.query('password'));
+// 	const query = `SELECT * FROM [User] WHERE email = "${c.req.query('email')}" AND password = "${c.req.query('password')}"`;
+// 	const user = await c.env.DB.prepare(query);
+// 	return c.json(user);
+// });
+//
+// app.post('/auth/register', async (c) => {
+// 	const email = c.req.query('email');
+// 	const password = c.req.query('password');
+// 	const query = `INSERT INTO [User] (email, password) VALUES ("${email}", "${password}")`;
+// 	const user = await c.env.DB.prepare(query);
+// 	return c.json(user);
+// });
+//
+// app.get('/users', async (c) => {
+// 	const query = `SELECT * FROM [User]`;
+// 	const user = c.env.DB.prepare(query);
+// 	return c.json(user);
+// });
+
+app.post('/listings/create', async (c) => {
+	return createListing(c);
 });
 
-app.get('/auth/login', async (c) => {
-	console.log("Printing email" + c.req.query('email'));
-	console.log("Printing password" + c.req.query('password'));
-	const query = `SELECT * FROM [User] WHERE email = "${c.req.query('email')}" AND password = "${c.req.query('password')}"`;
-	const user = await c.env.DB.prepare(query);
-	return c.json(user);
+// updating loaning table when add a new lender with concat lender id and lender amount
+app.put('/listings/update/newLenders', async (c) => {
+	return updateNewLenders(c);
 });
 
-app.post('/auth/register', async (c) => {
-	const email = c.req.query('email');
-	const password = c.req.query('password');
-	const query = `INSERT INTO [User] (email, password) VALUES ("${email}", "${password}")`;
-	const user = await c.env.DB.prepare(query);
-	return c.json(user);
+// update the listing once goal is reached
+app.put('/listings/update/status/finished', async (c) => {
+	return updateStatusFinished(c);
 });
 
-app.get('/users', async (c) => {
-	const query = `SELECT * FROM [User]`;
-	const user = await c.env.DB.prepare(query);
-	return c.json(user);
+app.get('/listings/getOne', async (c) => {
+	return getListing(c);
 });
 
-
-
+app.get('/listings/getAll', async (c) => {
+	return getAllListings(c);
+});
 
 
 
