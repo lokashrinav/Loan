@@ -5,6 +5,7 @@ import LoanDetailsScreen from './LoanDetailsScreen'; // Import your loan details
 import ViewProfileScreen from './viewProfile';
 import ViewAddScreen from './viewAdd';
 import ViewNotificationScreen from './viewNotification';
+import LoginScreen from './LoginScreen';
 
 const loansData = require('./tempData.json');
 
@@ -42,6 +43,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomePage} />
         {loansData.loans.map((loan, index) => (
           <Stack.Screen

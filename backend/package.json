@@ -1,0 +1,23 @@
+{
+	"name": "template-worker-d1",
+	"version": "0.0.0",
+	"private": true,
+	"description": "",
+	"keywords": [],
+	"license": "ISC",
+	"author": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "npm run dev",
+		"dev": "wrangler dev"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20231121.0",
+		"typescript": "^4.7.4",
+		"wrangler": "^3.21.0"
+	},
+	"dependencies": {
+		"@propelauth/cloudflare-worker": "^2.1.3",
+		"hono": "^3.11.8"
+	}
+}
