@@ -20,7 +20,7 @@ export default function App() {
 
 
   const current = {
-    "credit": "C+",
+    "credit": "640",
     "id": "4",
     "name": "Michael Brown",
     "email": "michael.brown@example.com",

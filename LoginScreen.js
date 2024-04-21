@@ -11,8 +11,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const { width, height } = Dimensions.get('window');
 
 import axios from 'axios';
+import * as Font from 'expo-font';
 
 
+
+
+const loadFonts = async () => {
+  await Font.loadAsync({
+    Georgia: require('./assets/Georgia.ttf'),
+  });
+};
+loadFonts();
 
 //Client secret: 33c6f6835b01d22ea282196be8585c741cb3a17c5d28ffaefdbc3986ed55ec93489895d5840a92c20e5285f62449b7c0
 
@@ -145,9 +154,9 @@ export default function LoginScreen({ navigation }) {
       <View style={styles.buttonView}>
         <Button disabled={!request} title="Sign Up" onPress={() => promptAsync()} />
       </View>
-      <View style={styles.buttonView}>
+{/*       <View style={styles.buttonView}>
         <Button disabled={!request} title="Logout" onPress={() => logoutUser()} />
-      </View>
+      </View> */}
     </SafeAreaView>
   )
 }
@@ -218,10 +227,11 @@ const styles = StyleSheet.create({
     width: 170
   },
   title: {
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: "bold",
     textTransform: "uppercase",
     textAlign: "center",
+    fontFamily: "Georgia",
     paddingVertical: 40,
     color: "red"
   },
@@ -277,7 +287,7 @@ const styles = StyleSheet.create({
   buttonView: {
     width: "100%",
     paddingHorizontal: width * 0.07,
-    marginTop: height * 0.02, // 2% of screen height
+    marginTop: height * 0.02, // 2% of screen fheight
     marginBottom: height * 0.02, // 2% of screen height
   },
   optionsText: {

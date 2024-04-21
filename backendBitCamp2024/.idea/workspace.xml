@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf1687b8-d602-41ca-ac60-bc777e6ebe52" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LoanDetailsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../LoanDetailsScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../viewProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../viewProfile.js" afterDir="false" />
-    </list>
+    <list default="true" id="bf1687b8-d602-41ca-ac60-bc777e6ebe52" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
