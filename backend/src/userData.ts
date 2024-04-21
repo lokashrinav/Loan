@@ -4,13 +4,23 @@ import { html } from 'hono/html';
 
 
 export const initUser = async (c: any) => {
+	const access_token = c.body('access_token');
+	const refresh_token = c.body('refresh_token');
+	const email = c.body('email');
+	const password = "password";
+	const queryOne = `INSERT INTO auth (email, password, access_token, refresh_token) VALUES (${email}, ${password}, ${access_token}, ${refresh_token})`;
+	const authExecution = c.env.DB.prepare(queryOne);
 	const address = c.body('address');
 	const profileImgLink = c.body('profileImgLink');
 	const creditScore = c.body('creditScore');
 	const first_name = c.body('first_name');
 	const last_name = c.body('last_name');
 	const user_id = c.body('user_id');
-	const query = `INSERT INTO user_data (userid, first_name, last_name, address, profleimagelink, credit_score) VALUES (${user_id}, ${first_name}, ${last_name}, ${address}, ${profileImgLink}, ${creditScore})`;
+	const queryTwo = `INSERT INTO user_data (userid, first_name, last_name, address, profleimagelink, credit_score) VALUES (${user_id}, ${first_name}, ${last_name}, ${address}, ${profileImgLink}, ${creditScore})`;
+	const userExecution = c.env.DB.prepare(queryTwo);
+
+	const joint = {authExecution, userExecution};
+	return c.json(joint);
 };
 
 export const getUser = async (c: any) => {
